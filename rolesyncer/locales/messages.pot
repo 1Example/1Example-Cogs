@@ -1,0 +1,166 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2025-10-13 10:52+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: redgettext 3.4.2\n"
+
+#: rolesyncer/rolesyncer.py:12
+#, docstring
+msgid "Sync Roles"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:43
+msgid "One-way rolesync / {r1name} added."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:58
+msgid "One-way rolesync / {r1name} removed."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:71
+msgid "Two-way rolesync / {r1name} removed."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:81
+msgid "Two-way rolesync / {r2name} removed."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:89 rolesyncer/rolesyncer.py:94
+msgid "Two-way rolesync"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:102
+#, docstring
+msgid "Sync roles"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:108
+#, docstring
+msgid ""
+"Takes 2 Roles. If the first role is assigned to a user, the second one will "
+"be assigned as well."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:113
+msgid "{role2name} will now be synced to {role1name}"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:121
+#, docstring
+msgid ""
+"Takes 2 Roles. If either role is assigned to a user, the other one will be "
+"assigned as well."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:126
+msgid "{role1name} and {role2name} will now be synced."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:134
+#, docstring
+msgid "(Retroactively) Apply current sync settings to all members"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:135
+msgid "Applying one way sync..."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:141
+msgid "Applying sync {r1name} -> {r2name}"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:147
+msgid "One-way rolesync / {r1name} -> {r2name} "
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:159
+msgid "Applying two way sync..."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:163
+msgid "Applying sync {r1name} <-> {r2name}"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:169
+msgid "Two-way rolesync / {r1name} <-> {r2name} "
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:186
+msgid "Two-way rolesync / {r2name} <-> {r1name} "
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:198
+msgid "Done (Applied {count} roles)"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:204
+#, docstring
+msgid "Unsync roles"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:210 rolesyncer/rolesyncer.py:223
+#, docstring
+msgid "Takes 2 roles and removes their sync"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:213 rolesyncer/rolesyncer.py:226
+msgid "Sync removed from {role1name} and {role2name}."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:218 rolesyncer/rolesyncer.py:231
+msgid "Couldn't find these roles in the sync database."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:236
+#, docstring
+msgid "List all exclusive roles"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:239
+msgid "Rolesync"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:249
+msgid "No roles in one-way sync."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:251
+msgid ""
+"One-way sync:\n"
+"{text}"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:254
+msgid "One-way sync:"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:264
+msgid "No roles in two-way sync."
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:266
+msgid ""
+"Two-way sync:\n"
+"{text}"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:269
+msgid "Two-way sync:"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:276
+#, docstring
+msgid "Remove one way sync from config"
+msgstr ""
+
+#: rolesyncer/rolesyncer.py:287
+#, docstring
+msgid "Remove two way sync from config"
+msgstr ""
