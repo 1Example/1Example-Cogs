@@ -1,0 +1,10 @@
+{
+    "author": ["You"],
+    "min_bot_version": "3.5.0",
+    "description": "Exposes a generic Config editor page on the Dashboard for cogs that don't ship their own dashboard integration.",
+    "hidden": false,
+    "install_msg": "Thanks for installing DashboardBridge! Load `dashboard` first, then load this cog. A new 'DashboardBridge' entry will appear under Third Parties.",
+    "short": "Generic dashboard settings pages for any cog.",
+    "end_user_data_statement": "This cog does not store any end user data. It only reads/writes the guild-scope Config of other loaded cogs, at the request of a user with dashboard permission to do so.",
+    "requirements": ["wtforms"]
+}
