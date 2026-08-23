@@ -467,7 +467,13 @@ async def handle_settings_page(
             "error_title": _("Member not found"),
             "error_message": _("You are not a member of this guild."),
         }
-    if not await cog.bot.is_admin(member):
+    is_privileged = (
+        await cog.bot.is_owner(user)
+        or member.id == guild.owner_id
+        or member.guild_permissions.administrator
+        or await cog.bot.is_admin(member)
+    )
+    if not is_privileged:
         log.warning(f"Member {user.name} is not an admin in guild {guild.name}")
         return {
             "status": 1,
