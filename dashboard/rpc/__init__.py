@@ -495,6 +495,16 @@ class DashboardRPC:
                 else "https://cdn.discordapp.com/embed/avatars/1.png"
             ),
             "icon_animated": guild.icon.is_animated() if guild.icon is not None else False,
+            # Extra presentation data used by the guild Overview tab.
+            "banner_url": guild.banner.url if guild.banner is not None else None,
+            "splash_url": guild.splash.url if guild.splash is not None else None,
+            "description": guild.description,
+            "vanity_url_code": guild.vanity_url_code,
+            "boosters_number": guild.premium_subscription_count or 0,
+            "boost_tier": guild.premium_tier or 0,
+            "emojis_number": len(guild.emojis),
+            "stickers_number": len(guild.stickers),
+            "categories_number": len(guild.categories),
             "verification_level": verification_level,
             "created_at": guild.created_at.timestamp(),
             "joined_at": guild.me.joined_at.timestamp(),
