@@ -411,6 +411,13 @@ class DashboardRPC:
                 elif (filter is None or filter == "mod") and await self.bot.is_mod(member):
                     guild_infos["user_role"] = "MOD"
                     guilds.append(guild_infos)
+                elif filter is None or filter == "member":
+                    # Plain members previously matched no branch at all, so the guild
+                    # list came back empty for them and they could never reach the
+                    # per-guild module pages (e.g. the audio player). get_guild()
+                    # already allows them through when for_third_parties is set.
+                    guild_infos["user_role"] = "MEMBER"
+                    guilds.append(guild_infos)
             if filter is None:
                 self.guilds_cache[user_id] = {"guilds": guilds, "time": time.time()}
 
