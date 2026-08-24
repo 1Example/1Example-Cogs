@@ -357,7 +357,7 @@ class DashboardRPC:
         per_page: int | str | None = None,
         page: int | str | None = None,
         query: str | None = None,
-        filter: typing.Literal["owner", "admin", "mod"] | None = None,
+        filter: typing.Literal["owner", "admin", "mod", "member"] | None = None,
     ) -> dict[str, typing.Any]:
         user = self.bot.get_user(user_id)
         if user is None:
