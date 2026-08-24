@@ -8,7 +8,7 @@ import typing
 
 import discord
 
-from redbot.core import commands, core_commands, i18n
+from redbot.core import bank, commands, core_commands, i18n
 from redbot.core.bot import Red
 from redbot.core.i18n import Translator
 from redbot.core.utils import AsyncIter
@@ -39,6 +39,7 @@ class DashboardRPC:
 
         # Initialize RPC handlers.
         self.bot.register_rpc_handler(self.check_version)
+        self.bot.register_rpc_handler(self.get_user_profile)
         self.bot.register_rpc_handler(self.get_data)
         self.bot.register_rpc_handler(self.get_variables)
         self.bot.register_rpc_handler(self.get_bot_variables)
@@ -93,9 +94,78 @@ class DashboardRPC:
         self.bot.unregister_rpc_handler(self.set_dashboard_settings)
         self.bot.unregister_rpc_handler(self.get_bot_settings)
         self.bot.unregister_rpc_handler(self.set_bot_settings)
+        self.bot.unregister_rpc_handler(self.get_user_profile)
         self.bot.unregister_rpc_handler(self.set_custom_pages)
         for handler in self.handlers.values():
             handler.unload()
+
+    @rpc_check()
+    async def get_user_profile(self, user_id: int) -> dict[str, typing.Any]:
+        """Profile data for the logged-in user: identity, economy balance and reach."""
+        user = self.bot.get_user(user_id)
+        if user is None:
+            return {"status": 1}
+
+        shared_guilds = [g for g in self.bot.guilds if g.get_member(user_id) is not None]
+        owned = sum(1 for g in shared_guilds if g.owner_id == user_id)
+        admin_of = 0
+        mod_of = 0
+        for guild in shared_guilds:
+            member = guild.get_member(user_id)
+            if member is None:
+                continue
+            if await self.bot.is_admin(member) or member.guild_permissions.manage_guild:
+                admin_of += 1
+            elif await self.bot.is_mod(member):
+                mod_of += 1
+
+        # Economy: global banks have a single balance, per-guild banks have one
+        # balance per server, so report both shapes correctly.
+        balances = []
+        currency = "credits"
+        is_global = False
+        try:
+            is_global = await bank.is_global()
+            if is_global:
+                currency = await bank.get_currency_name()
+                member = next((g.get_member(user_id) for g in shared_guilds if g.get_member(user_id)), None)
+                if member is not None:
+                    balances.append(
+                        {"guild": None, "balance": await bank.get_balance(member)}
+                    )
+            else:
+                for guild in shared_guilds:
+                    member = guild.get_member(user_id)
+                    if member is None:
+                        continue
+                    balances.append(
+                        {
+                            "guild": guild.name,
+                            "guild_id": guild.id,
+                            "balance": await bank.get_balance(member),
+                            "currency": await bank.get_currency_name(guild),
+                        }
+                    )
+                balances.sort(key=lambda b: b["balance"], reverse=True)
+        except Exception:  # noqa: BLE001 - economy is optional
+            balances = []
+
+        return {
+            "status": 0,
+            "id": user.id,
+            "name": user.display_name,
+            "username": user.name,
+            "avatar_url": user.display_avatar.url,
+            "created_at": user.created_at.timestamp(),
+            "is_owner": user_id in self.bot.owner_ids,
+            "shared_guilds": len(shared_guilds),
+            "owned_guilds": owned,
+            "admin_guilds": admin_of,
+            "mod_guilds": mod_of,
+            "bank_is_global": is_global,
+            "currency": currency,
+            "balances": balances[:25],
+        }
 
     @rpc_check()
     async def check_version(self) -> dict[str, int]:
